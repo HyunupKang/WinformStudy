@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{419F9366-15AB-4BAE-A23D-5B5FA49F52E8}</ProjectGuid>
-    <OutputType>WinExe</OutputType>
-    <RootNamespace>ApplicationDev</RootNamespace>
-    <AssemblyName>ApplicationDev</AssemblyName>
+    <ProjectGuid>{3E30C845-8F4A-4D02-B678-48A830DBA39D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <RootNamespace>DEV_Form</RootNamespace>
+    <AssemblyName>DEV_Form</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -32,12 +32,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Data.SqlClient, Version=4.6.1.2, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Data.SqlClient.4.8.2\lib\net461\System.Data.SqlClient.dll</HintPath>
-    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -49,40 +49,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FM_Login.cs">
+    <Compile Include="MDI_TEST.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FM_Login.Designer.cs">
-      <DependentUpon>FM_Login.cs</DependentUpon>
+    <Compile Include="MDI_TEST.Designer.cs">
+      <DependentUpon>MDI_TEST.cs</DependentUpon>
     </Compile>
-    <Compile Include="FM_Main.cs">
+    <Compile Include="MDI_TEST2.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FM_Main.Designer.cs">
-      <DependentUpon>FM_Main.cs</DependentUpon>
+    <Compile Include="MDI_TEST2.Designer.cs">
+      <DependentUpon>MDI_TEST2.cs</DependentUpon>
     </Compile>
-    <Compile Include="FM_PassWord.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FM_PassWord.Designer.cs">
-      <DependentUpon>FM_PassWord.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
-    </Compile>
-    <EmbeddedResource Include="FM_Main.resx">
-      <DependentUpon>FM_Main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FM_PassWord.resx">
-      <DependentUpon>FM_PassWord.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FM_Login.resx">
-      <DependentUpon>FM_Login.cs</DependentUpon>
+    <EmbeddedResource Include="MDI_TEST.resx">
+      <DependentUpon>MDI_TEST.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -92,9 +73,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -107,30 +86,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BtnSearch.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BtnAdd.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BtnDelete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BtnSaveB.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BtnClose.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\BtcExit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\DEV_Form\DEV_Form.csproj">
-      <Project>{3e30c845-8f4a-4d02-b678-48a830dba39d}</Project>
-      <Name>DEV_Form</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

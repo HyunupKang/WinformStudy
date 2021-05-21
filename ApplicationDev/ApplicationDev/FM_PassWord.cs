@@ -69,7 +69,7 @@ namespace ApplicationDev
             }
             // 2. 이전 비밀번호 일치 확인
             if (DtTemp.Rows[0]["PW"].ToString() != sPerPw)  // row는 무조건 인덱스, 열은 문자열로 가능함  // DtTemp.Rows[0]["PW"]으로 하면 형이 Object인데 정확히 어떤 타입인지 명시 안해줘서 string과 비교하면 fale로 반환한다. 
-            {
+            {                                               // 데이터 테이블에는 형식이 안정해져있다.               
                 MessageBox.Show("이전 비밀번호가 일치하지 않습니다.");
                 return;
             }
