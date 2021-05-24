@@ -39,7 +39,7 @@ namespace ApplicationDev // namespace : 클래스들의 모음, 프로젝트를 
         {
             try
             {
-                string strCon = "Data Source = 61.105.9.203; Initial Catalog = AppDev; USER ID = kfqs; Password = 1234"; // 접속주소
+                string strCon = "Data Source = 61.105.9.203; Initial Catalog = AppDev; USER ID = kfqs1; Password = 1234"; // 접속주소
                 Connect_Log = new SqlConnection(strCon);                                                                 // 접속 정보 관리 클래스에 접속주소를 입력
                 Connect_Log.Open();                                                                                      // 데이터 베이스에 접속한다.
 

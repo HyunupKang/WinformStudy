@@ -12,7 +12,7 @@ using DEV_Form;
 
 namespace ApplicationDev
 {
-    public partial class FM_Main : Form
+    public partial class FM_Main : Form  // Form : 유저 인터페이스를 만들어주는 클래스
     {
         public FM_Main()
         {
@@ -43,7 +43,14 @@ namespace ApplicationDev
         {
             this.Close();
         }
-
+        private void stbClose_Click(object sender, EventArgs e)
+        {
+            //  열려있는 화면이 있는지 확인
+            if (myTabControl1.TabPages.Count == 0) return;
+            
+            // 선택된 탭페이지를 닫는다.
+            myTabControl1.SelectedTab.Dispose();
+        }
         private void timer1_Tick(object sender, EventArgs e) 
         {
             tssNowDate.Text = DateTime.Now.ToString();
@@ -66,15 +73,38 @@ namespace ApplicationDev
             Type typeForm = assemb.GetType("DEV_Form." + e.ClickedItem.Name.ToString(), true);  // 버튼을 클릭했을 때 받아오는 e 값의 Name을(테스트 화면의 이름인 MDI_TEST) Type형의 typeForm에 저장
             Form ShowForm = (Form)Activator.CreateInstance(typeForm);  // 윗줄에서 저장한 이름과 똑같은 이름의 파일 FORM을 열어라
 
-            ShowForm.MdiParent = this;
-            ShowForm.Show();
+            // 해당되는 폼이 이미 오픈되어 있는지 확인 후, 활성화 또는 신규 오픈 한다.
+            for (int i = 0; i < myTabControl1.TabPages.Count; i++)
+            {
+                if (myTabControl1.TabPages[i].Name == e.ClickedItem.Name.ToString())
+                {
+                    myTabControl1.SelectedTab = myTabControl1.TabPages[i];
+                    return;
+                }
+            }
+            /*            ShowForm.MdiParent = this;
+                        ShowForm.Show();*/
 
+            myTabControl1.AddForm(ShowForm); // 탭페이지에 폼을 추가한다.myTabControl1은 MyTabControl의 이름이다.
         }
+    }
 
-        private void M_SYSTEM_Click(object sender, EventArgs e)
+    public partial class MDIForm : TabPage  //  TabPage를 MIDForm이란 이름으 로 쓰려고 partial class를 작성한거임
+    { }
+    public partial class MyTabControl : TabControl  // partial : 파생 클래스, TabControl 기능을 가져오면서, MyTabControl에서 사용할 기능을 추가 정의 하겠다
+    {
+        public void AddForm(Form NewForm)
         {
-            
+            if (NewForm == null) return;    //  벨리데이션 코드임(코드 실행 조건), 인자로 받은 폼이 없을 경우 실행 중지
+            NewForm.TopLevel = false;       //  인자로 받은 폼이 최상위 개체가 아님을 선언(디폴트로 true임)
+            MDIForm page = new MDIForm();   //  탭 페이지 객체 생성, 탭컨트롤안에 탭 페이지가 있다.
+            page.Controls.Clear();          //  페이지 초기화
+            page.Controls.Add(NewForm);     //  페이지에 폼 추가
+            page.Text = NewForm.Text;       //  각 탭 페이지의 이름은 폼에서 지정한 이름으로 설정
+            page.Name = NewForm.Name;       //  폼에서 설정한 이름으로 탭 페이지 설정
+            base.TabPages.Add(page);        //  base : 부모 클래스에 있는 함수를 호출, 내가 만든 page를 추가한다->어디에? TabPages(탭 컨트롤)에
+            NewForm.Show();                 //  인자를 받은 폼을 보여준다
+            base.SelectedTab = page;        //  현재 선택된 페이지를 호출한 폼의 페이지로 실행
         }
-
     }
 }
