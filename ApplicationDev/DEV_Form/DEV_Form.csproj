@@ -49,6 +49,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common.cs" />
+    <Compile Include="FM_CUST.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FM_CUST.Designer.cs">
+      <DependentUpon>FM_CUST.cs</DependentUpon>
+    </Compile>
     <Compile Include="FM_ITEM.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -68,6 +75,9 @@
       <DependentUpon>MDI_TEST2.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FM_CUST.resx">
+      <DependentUpon>FM_CUST.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FM_ITEM.resx">
       <DependentUpon>FM_ITEM.cs</DependentUpon>
     </EmbeddedResource>

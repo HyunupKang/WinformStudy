@@ -66,7 +66,7 @@ namespace DEV_Form
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(28, 41);
+            this.label1.Location = new System.Drawing.Point(28, 43);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(72, 15);
             this.label1.TabIndex = 0;
@@ -89,7 +89,7 @@ namespace DEV_Form
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(295, 40);
+            this.label2.Location = new System.Drawing.Point(295, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 15);
             this.label2.TabIndex = 2;
@@ -97,24 +97,26 @@ namespace DEV_Form
             // 
             // dtpStart
             // 
-            this.dtpStart.Location = new System.Drawing.Point(624, 37);
+            this.dtpStart.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpStart.Location = new System.Drawing.Point(637, 37);
             this.dtpStart.Name = "dtpStart";
             this.dtpStart.Size = new System.Drawing.Size(149, 25);
             this.dtpStart.TabIndex = 4;
-            this.dtpStart.Value = new System.DateTime(2021, 5, 24, 0, 0, 0, 0);
+            this.dtpStart.Value = new System.DateTime(2021, 5, 25, 0, 0, 0, 0);
             // 
             // dtpEnd
             // 
-            this.dtpEnd.Location = new System.Drawing.Point(803, 37);
+            this.dtpEnd.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpEnd.Location = new System.Drawing.Point(816, 37);
             this.dtpEnd.Name = "dtpEnd";
             this.dtpEnd.Size = new System.Drawing.Size(146, 25);
             this.dtpEnd.TabIndex = 5;
-            this.dtpEnd.Value = new System.DateTime(2021, 5, 24, 0, 0, 0, 0);
+            this.dtpEnd.Value = new System.DateTime(2021, 5, 25, 0, 0, 0, 0);
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(546, 42);
+            this.label3.Location = new System.Drawing.Point(559, 42);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(72, 15);
             this.label3.TabIndex = 6;
@@ -123,7 +125,7 @@ namespace DEV_Form
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(779, 42);
+            this.label4.Location = new System.Drawing.Point(792, 42);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(18, 15);
             this.label4.TabIndex = 7;
@@ -143,6 +145,7 @@ namespace DEV_Form
             this.cboItemDesc.Name = "cboItemDesc";
             this.cboItemDesc.Size = new System.Drawing.Size(184, 23);
             this.cboItemDesc.TabIndex = 8;
+            this.cboItemDesc.SelectedIndexChanged += new System.EventHandler(this.cboItemDesc_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -245,6 +248,8 @@ namespace DEV_Form
             // 
             // dgvGrid
             // 
+            this.dgvGrid.AllowUserToAddRows = false;
+            this.dgvGrid.AllowUserToDeleteRows = false;
             this.dgvGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvGrid.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dgvGrid.Location = new System.Drawing.Point(3, 84);
@@ -253,6 +258,7 @@ namespace DEV_Form
             this.dgvGrid.RowTemplate.Height = 27;
             this.dgvGrid.Size = new System.Drawing.Size(1065, 198);
             this.dgvGrid.TabIndex = 17;
+            this.dgvGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrid_CellContentClick);
             // 
             // btnSave
             // 
@@ -343,7 +349,7 @@ namespace DEV_Form
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "FM_ITEM";
-            this.Text = "FM_ITEM";
+            this.Text = "품목 관리";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.FM_ITEM_Load);
             this.groupBox1.ResumeLayout(false);

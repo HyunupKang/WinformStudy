@@ -10,7 +10,6 @@ using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
 using System.Data.SqlClient;
 
-
 namespace ApplicationDev // namespace : 클래스들의 모음, 프로젝트를 생성하면 namespace가 생성되는데 namespace마다 실행 파일이 있지만, 라이브러리화 하면 참조형식으로 설정할 수 있다
 {
     public partial class FM_Login : Form
@@ -88,6 +87,9 @@ namespace ApplicationDev // namespace : 클래스들의 모음, 프로젝트를 
                 }
                 else
                 {
+                    DEV_Form.Common.LoginID = txtID.Text;
+                    DEV_Form.Common.LoginName = DtTemp_Login.Rows[0]["USERNAME"].ToString(); // 유저 명을 common에 등록함
+
                     this.Tag = DtTemp_Login.Rows[0]["USERNAME"].ToString(); // 로그인 화면이 닫혀도 데이터를 유지하기 위해 Tag에 저장한다
                                                                             // FM_Main.cs에서 FM_Login Login = new FM_Login(); 객체 생성과 Login.ShowDialog();로 로그인창 띄운후
                                                                             // tssUserName.Text = Login.Tag.ToString();로 Tag값 저장해서

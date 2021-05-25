@@ -45,6 +45,10 @@ namespace DEV_Form
                 cboItemDesc.DisplayMember = "ITEMDESC"; // 눈으로 보여줄 항목
                 cboItemDesc.ValueMember   = "ITEMDESC"; // 실제 데이터를 처리할 코드 항목
                 cboItemDesc.Text          = "";
+                
+                //원하는 날짜 픽스
+                dtpStart.Text = string.Format("{0:2018-MM-01}", DateTime.Now); // 출시일자의 시작 날짜 지정
+
             }
             catch (Exception ex)
             {
@@ -85,6 +89,8 @@ namespace DEV_Form
                                                                             "       ITEMNAME,  " +
                                                                             "       ITEMDESC,  " +
                                                                             "       ITEMDESC2, " +
+                                                                            "       CASE WHEN ENDFLAG = 'Y' THEN '단종' " +
+                                                                            "       WHEN ENDFLAG = 'N' THEN '생산' END AS ENDFLAG, " +
                                                                             "       ENDFLAG,   " + 
                                                                             "       PRODDATE,  " +
                                                                             "       MAKEDATE,  " +
@@ -95,12 +101,18 @@ namespace DEV_Form
                                                                             " WHERE ITEMCODE LIKE '%" + sItemCode + "%' " +
                                                                             "   AND ITEMNAME LIKE '%" + sItemName + "%' " +
                                                                             "   AND ITEMDESC LIKE '%" + sItemdesc + "%' " +
-                                                                            "   AND ENDFLAG  = '" + sEndFlag + "'", Connect);
+                                                                            "   AND ENDFLAG  = '" + sEndFlag + "'" +
+                                                                            "   AND PRODDATE BETWEEN '"  + sStartDate + "' AND '" + sEndDate + "'"
+                                                                            , Connect);
 
                 DataTable dtTemp = new DataTable();
-                Adapter.Fill(dtTemp);
+                Adapter.Fill(dtTemp); 
 
-                if (dtTemp.Rows.Count == 0) return;
+                if (dtTemp.Rows.Count == 0)
+                {
+                    dgvGrid.DataSource = null;
+                    return;
+                }
                 dgvGrid.DataSource = dtTemp; // 데이터 그리드 뷰에 데이터 테이블 등록
 
                 // 그리드뷰의 헤더 명칭 선언
@@ -186,7 +198,98 @@ namespace DEV_Form
             }
         }
 
+        // 저장버튼을 눌렀을때, 새로 추가된 내용인지 업데이트 해야될 내용인지 모호하다.
         private void btnSave_Click(object sender, EventArgs e)
+        {
+            // 선택된 행 데이터 저장
+            if (dgvGrid.Rows.Count == 0) return;
+            if (MessageBox.Show("선택된 데이터를 등록 하시겠습니까?", "데이터 등록", MessageBoxButtons.YesNo) == DialogResult.No) return;
+
+            string sItemCode = dgvGrid.CurrentRow.Cells["ITEMCODE"].Value.ToString();
+            string sItemName = dgvGrid.CurrentRow.Cells["ITEMNAME"].Value.ToString();
+            string sItemDesc = dgvGrid.CurrentRow.Cells["ITEMDESC"].Value.ToString();
+            string sItemDesc2 = dgvGrid.CurrentRow.Cells["ITEMDESC2"].Value.ToString();
+            string sItemEndFlag = dgvGrid.CurrentRow.Cells["ENDFLAG"].Value.ToString();
+            string sProdDate = dgvGrid.CurrentRow.Cells["PRODDATE"].Value.ToString();
+
+            SqlCommand cmd = new SqlCommand();
+            SqlTransaction Tran;
+
+            Connect = new SqlConnection(strCon);
+            Connect.Open();
+
+            // region : if문으로 데이터가 있는 경우 UPDATE, 없는 경우 INSERT
+            #region
+            /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+            //  2가지 방법중, 1번 방법
+            //  데이터 조회 후 해당 데이터가 있는지 확인 후 UPDATE, INSERT 구문 분기
+            /*            string sSql = "SELECT ITEMCODE FROM TB_TESTITEM_KHU WHERE ITEMCODE = '" + sItemCode + "'";
+                        SqlDataAdapter adapter = new SqlDataAdapter(sSql, Connect);
+                        DataTable dtTemp = new DataTable();
+                        adapter.Fill(dtTemp);*/
+            /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+            #endregion
+
+            //트랜잭션 설정
+            Tran = Connect.BeginTransaction("TESTTran");
+            cmd.Transaction = Tran;
+            cmd.Connection = Connect;
+
+            // region : if문으로 데이터가 있는 경우 UPDATE, 없는 경우 INSERT
+            #region
+            /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+            //  2가지 방법
+            //  1. 데이터가 있는 경우 UPDATE, 없는 경우 INSERT
+            /*            if(dtTemp.Rows.Count == 0)
+                        {
+                            //  데이터가 없으니 INSERT 해라
+                            cmd.CommandText = "INSERT INTO TB_TESTITEM_KHU (ITEMCODE,       ITEMNAME,                 ITEMDESC,        ITEMDESC2,         ENDFLAG,                 PRODDATE,      MAKEDATE,   MAKER)" +
+                                              "                      VALUES ('" + sItemCode + "','" + sItemName + "','" + sItemDesc + "','" + sItemDesc2 + "','" + "N" + "','" + sProdDate + "',GETDATE(),'" + "" + "')";
+                        }
+                        else
+                        {
+                            //  데이터가 있으니 update해라
+                            cmd.CommandText = "UPDATE TB_TESTITEM_KHU                               " +
+                                              "    SET ITEMNAME = '"   + sItemName      + "',   " +
+                                              "        ITEMDESC = '"   + sItemDesc      + "',   " +
+                                              "        ITEMDESC2 = '"  + sItemDesc2     + "',   " +
+                                              "        ENDFLAG = '"    + "N"   + "',   " +
+                                              "        PRODDATE = '"   + sProdDate      + "',   " +
+                                              "        EDITOR = '',  " +
+                                              //"        EDITOR = '"    + Commoncs.LoginUserID + "',  " +
+                                              "        EDITDATE = GETDATE() " +
+                                              "  WHERE ITEMCODE = '" + sItemCode + "'";
+                        }*/
+            /*ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+            #endregion  
+
+            cmd.CommandText = "UPDATE TB_TESTITEM_KHU                                " +
+                              "    SET ITEMNAME          = '" + sItemName   + "',    " +
+                              "        ITEMDESC          = '" + sItemDesc   + "',    " +
+                              "        ITEMDESC2         = '" + sItemDesc2  + "',    " +
+                              "        ENDFLAG           = '" + "N"         + "',    " +
+                              "        PRODDATE          = '" + sProdDate   + "',    " +
+                              "        EDITOR = '"    + Common.LoginName + "',  " +
+                              "        EDITDATE = GETDATE()                          " +
+                              "  WHERE ITEMCODE = '" + sItemCode + "'" +
+                              " IF (@@ROWCOUNT =0) " + // ROWCOUNT로 몇번 바뀌었는지 확인할 수 있음
+                              "INSERT INTO TB_TESTITEM_KHU(ITEMCODE,           ITEMNAME,            ITEMDESC,           ITEMDESC2,          ENDFLAG,           PRODDATE,      MAKEDATE,     MAKER) " +
+                              "VALUES('" + sItemCode + "','" + sItemName + "','" + sItemDesc + "','" + sItemDesc2 + "','" + "N" + "','" + sProdDate + "',GETDATE(),'" + Common.LoginName + "')";
+
+            cmd.ExecuteNonQuery();
+
+            //  성공 시 DB COMMIT
+            Tran.Commit();
+            MessageBox.Show("정상적으로 등록 하였습니다.");
+            Connect.Close();
+        }
+
+        private void cboItemDesc_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dgvGrid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }

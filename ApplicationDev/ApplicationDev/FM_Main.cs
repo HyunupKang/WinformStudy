@@ -17,10 +17,15 @@ namespace ApplicationDev
         public FM_Main()
         {
             InitializeComponent();
+            //로그인 폼 호출
             FM_Login Login = new FM_Login();
             Login.ShowDialog();
+
             tssUserName.Text = Login.Tag.ToString(); // Tag를 배열처럼 사용할 수 없다. 두가지 이상이면 Liter를 사용, 로그인 안하고 창 끄면 에러뜸(Null값이라서인가?)
 
+            //버튼이 클릭 안될때
+            #region
+            /*  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
             // 버튼에 이벤트 추가(버튼이 안눌릴 때)
             //this.stbExit.Click += new System.EventHandler(this.stbExit_Click);   만약 디자인에서 클릭이 안될때 이것 추가,
             //                                                                     그리고 private void stbExit_Click(object sender, EventArgs e){} 작성
@@ -29,12 +34,14 @@ namespace ApplicationDev
 
             // 메뉴 클릭 이벤트 추가(클릭이 안될 때)
             //this.M_SYSTEM.DropDownItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.MBI_TEST_DropDownItemClicked); // M_SYSTEM : 메인창의 MenuStrip 이름, 이걸 클릭했을 때 이벤트 발생
+            /*  ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ*/
+            #endregion
 
             if (tssUserName.Text == "FAIL")  // USERNAME이 FAIL이면 성립 안함
             {
                 //Application.ExitThread();   // 동작하고 있는 모든 쓰레드를 닫아라
                 //Application.Exit();
-                
+
                 System.Environment.Exit(0); // 위 코드와 같은 기능임
             }
         }
