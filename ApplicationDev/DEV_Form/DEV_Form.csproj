@@ -36,6 +36,9 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ApplicationDev">
+      <HintPath>..\ApplicationDev\bin\Debug\ApplicationDev.exe</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -49,18 +52,44 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseMDIChildForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaseMDIChildForm.Designer.cs">
+      <DependentUpon>BaseMDIChildForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ChildInterface.cs" />
     <Compile Include="Common.cs" />
+    <Compile Include="DBHelper.cs" />
     <Compile Include="FM_CUST.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FM_CUST.Designer.cs">
       <DependentUpon>FM_CUST.cs</DependentUpon>
     </Compile>
+    <Compile Include="Fm_Cust2.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Fm_Cust2.designer.cs">
+      <DependentUpon>Fm_Cust2.cs</DependentUpon>
+    </Compile>
     <Compile Include="FM_ITEM.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="FM_ITEM.Designer.cs">
       <DependentUpon>FM_ITEM.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FM_OVERRIDE.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FM_OVERRIDE.Designer.cs">
+      <DependentUpon>FM_OVERRIDE.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FM_USER.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FM_USER.Designer.cs">
+      <DependentUpon>FM_USER.cs</DependentUpon>
     </Compile>
     <Compile Include="MDI_TEST.cs">
       <SubType>Form</SubType>
@@ -75,11 +104,23 @@
       <DependentUpon>MDI_TEST2.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="BaseMDIChildForm.resx">
+      <DependentUpon>BaseMDIChildForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FM_CUST.resx">
       <DependentUpon>FM_CUST.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Fm_Cust2.resx">
+      <DependentUpon>Fm_Cust2.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FM_ITEM.resx">
       <DependentUpon>FM_ITEM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FM_OVERRIDE.resx">
+      <DependentUpon>FM_OVERRIDE.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FM_USER.resx">
+      <DependentUpon>FM_USER.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MDI_TEST.resx">
       <DependentUpon>MDI_TEST.cs</DependentUpon>

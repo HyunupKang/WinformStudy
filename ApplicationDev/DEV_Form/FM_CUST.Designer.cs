@@ -30,6 +30,8 @@ namespace DEV_Form
         private void InitializeComponent()
         {
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rdoCutProduct = new System.Windows.Forms.RadioButton();
+            this.rdoVProduct = new System.Windows.Forms.RadioButton();
             this.rdoCVProduct = new System.Windows.Forms.RadioButton();
             this.rdoPumpProduct = new System.Windows.Forms.RadioButton();
             this.txtCustCode = new System.Windows.Forms.TextBox();
@@ -43,13 +45,12 @@ namespace DEV_Form
             this.dtpCustEnd = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.rdoVProduct = new System.Windows.Forms.RadioButton();
-            this.rdoCutProduct = new System.Windows.Forms.RadioButton();
             this.btnCSave = new System.Windows.Forms.Button();
             this.btnCDelete = new System.Windows.Forms.Button();
             this.btnCAdd = new System.Windows.Forms.Button();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.dgvCGrid = new System.Windows.Forms.DataGridView();
+            this.rboAll = new System.Windows.Forms.RadioButton();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -58,16 +59,37 @@ namespace DEV_Form
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.rboAll);
             this.groupBox2.Controls.Add(this.rdoCutProduct);
             this.groupBox2.Controls.Add(this.rdoVProduct);
             this.groupBox2.Controls.Add(this.rdoCVProduct);
             this.groupBox2.Controls.Add(this.rdoPumpProduct);
             this.groupBox2.Location = new System.Drawing.Point(229, 109);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(508, 70);
+            this.groupBox2.Size = new System.Drawing.Size(597, 70);
             this.groupBox2.TabIndex = 26;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "종목";
+            // 
+            // rdoCutProduct
+            // 
+            this.rdoCutProduct.AutoSize = true;
+            this.rdoCutProduct.Location = new System.Drawing.Point(247, 36);
+            this.rdoCutProduct.Name = "rdoCutProduct";
+            this.rdoCutProduct.Size = new System.Drawing.Size(88, 19);
+            this.rdoCutProduct.TabIndex = 12;
+            this.rdoCutProduct.Text = "절삭가공";
+            this.rdoCutProduct.UseVisualStyleBackColor = true;
+            // 
+            // rdoVProduct
+            // 
+            this.rdoVProduct.AutoSize = true;
+            this.rdoVProduct.Location = new System.Drawing.Point(133, 36);
+            this.rdoVProduct.Name = "rdoVProduct";
+            this.rdoVProduct.Size = new System.Drawing.Size(108, 19);
+            this.rdoVProduct.TabIndex = 11;
+            this.rdoVProduct.Text = "자동차 부품";
+            this.rdoVProduct.UseVisualStyleBackColor = true;
             // 
             // rdoCVProduct
             // 
@@ -83,11 +105,10 @@ namespace DEV_Form
             // 
             this.rdoPumpProduct.AutoSize = true;
             this.rdoPumpProduct.Checked = true;
-            this.rdoPumpProduct.Location = new System.Drawing.Point(366, 36);
+            this.rdoPumpProduct.Location = new System.Drawing.Point(345, 36);
             this.rdoPumpProduct.Name = "rdoPumpProduct";
             this.rdoPumpProduct.Size = new System.Drawing.Size(103, 19);
             this.rdoPumpProduct.TabIndex = 10;
-            this.rdoPumpProduct.TabStop = true;
             this.rdoPumpProduct.Text = "펌프압축기";
             this.rdoPumpProduct.UseVisualStyleBackColor = true;
             // 
@@ -97,10 +118,11 @@ namespace DEV_Form
             this.txtCustCode.Name = "txtCustCode";
             this.txtCustCode.Size = new System.Drawing.Size(183, 25);
             this.txtCustCode.TabIndex = 16;
+            this.txtCustCode.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCustCode_KeyDown);
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(779, 122);
+            this.btnSearch.Location = new System.Drawing.Point(847, 119);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(107, 45);
             this.btnSearch.TabIndex = 25;
@@ -142,6 +164,7 @@ namespace DEV_Form
             this.txtCustName.Name = "txtCustName";
             this.txtCustName.Size = new System.Drawing.Size(185, 25);
             this.txtCustName.TabIndex = 18;
+            this.txtCustName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtCustName_KeyDown);
             // 
             // dtpCustStart
             // 
@@ -200,26 +223,6 @@ namespace DEV_Form
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "거래처 조회";
             // 
-            // rdoVProduct
-            // 
-            this.rdoVProduct.AutoSize = true;
-            this.rdoVProduct.Location = new System.Drawing.Point(133, 36);
-            this.rdoVProduct.Name = "rdoVProduct";
-            this.rdoVProduct.Size = new System.Drawing.Size(108, 19);
-            this.rdoVProduct.TabIndex = 11;
-            this.rdoVProduct.Text = "자동차 부품";
-            this.rdoVProduct.UseVisualStyleBackColor = true;
-            // 
-            // rdoCutProduct
-            // 
-            this.rdoCutProduct.AutoSize = true;
-            this.rdoCutProduct.Location = new System.Drawing.Point(247, 36);
-            this.rdoCutProduct.Name = "rdoCutProduct";
-            this.rdoCutProduct.Size = new System.Drawing.Size(88, 19);
-            this.rdoCutProduct.TabIndex = 12;
-            this.rdoCutProduct.Text = "절삭가공";
-            this.rdoCutProduct.UseVisualStyleBackColor = true;
-            // 
             // btnCSave
             // 
             this.btnCSave.Location = new System.Drawing.Point(222, 24);
@@ -276,6 +279,16 @@ namespace DEV_Form
             this.dgvCGrid.Size = new System.Drawing.Size(1428, 467);
             this.dgvCGrid.TabIndex = 32;
             // 
+            // rboAll
+            // 
+            this.rboAll.AutoSize = true;
+            this.rboAll.Location = new System.Drawing.Point(454, 36);
+            this.rboAll.Name = "rboAll";
+            this.rboAll.Size = new System.Drawing.Size(58, 19);
+            this.rboAll.TabIndex = 13;
+            this.rboAll.Text = "전체";
+            this.rboAll.UseVisualStyleBackColor = true;
+            // 
             // FM_CUST
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
@@ -322,5 +335,6 @@ namespace DEV_Form
         private System.Windows.Forms.Button btnCAdd;
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.DataGridView dgvCGrid;
+        private System.Windows.Forms.RadioButton rboAll;
     }
 }

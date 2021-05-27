@@ -54,13 +54,13 @@ namespace DEV_Form
             this.btnPicSave = new System.Windows.Forms.Button();
             this.btnPicDelete = new System.Windows.Forms.Button();
             this.LoadPrc = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picItemImage = new System.Windows.Forms.PictureBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrid)).BeginInit();
             this.groupBox4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -258,6 +258,7 @@ namespace DEV_Form
             this.dgvGrid.RowTemplate.Height = 27;
             this.dgvGrid.Size = new System.Drawing.Size(1065, 198);
             this.dgvGrid.TabIndex = 17;
+            this.dgvGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrid_CellClick);
             this.dgvGrid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvGrid_CellContentClick);
             // 
             // btnSave
@@ -295,7 +296,7 @@ namespace DEV_Form
             this.groupBox4.Controls.Add(this.btnPicSave);
             this.groupBox4.Controls.Add(this.btnPicDelete);
             this.groupBox4.Controls.Add(this.LoadPrc);
-            this.groupBox4.Controls.Add(this.pictureBox1);
+            this.groupBox4.Controls.Add(this.picItemImage);
             this.groupBox4.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox4.Location = new System.Drawing.Point(0, 469);
             this.groupBox4.Name = "groupBox4";
@@ -312,6 +313,7 @@ namespace DEV_Form
             this.btnPicSave.TabIndex = 20;
             this.btnPicSave.Text = "저장";
             this.btnPicSave.UseVisualStyleBackColor = true;
+            this.btnPicSave.Click += new System.EventHandler(this.btnPicSave_Click);
             // 
             // btnPicDelete
             // 
@@ -321,6 +323,7 @@ namespace DEV_Form
             this.btnPicDelete.TabIndex = 19;
             this.btnPicDelete.Text = "삭제";
             this.btnPicDelete.UseVisualStyleBackColor = true;
+            this.btnPicDelete.Click += new System.EventHandler(this.btnPicDelete_Click);
             // 
             // LoadPrc
             // 
@@ -330,14 +333,18 @@ namespace DEV_Form
             this.LoadPrc.TabIndex = 18;
             this.LoadPrc.Text = "이미지 불러오기";
             this.LoadPrc.UseVisualStyleBackColor = true;
+            this.LoadPrc.Click += new System.EventHandler(this.LoadPrc_Click);
             // 
-            // pictureBox1
+            // picItemImage
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(12, 24);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(339, 187);
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.picItemImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picItemImage.Location = new System.Drawing.Point(12, 24);
+            this.picItemImage.Name = "picItemImage";
+            this.picItemImage.Size = new System.Drawing.Size(339, 187);
+            this.picItemImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picItemImage.TabIndex = 0;
+            this.picItemImage.TabStop = false;
+            this.picItemImage.Click += new System.EventHandler(this.picItemImage_Click);
             // 
             // FM_ITEM
             // 
@@ -359,7 +366,7 @@ namespace DEV_Form
             this.groupBox3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvGrid)).EndInit();
             this.groupBox4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picItemImage)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -388,7 +395,7 @@ namespace DEV_Form
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picItemImage;
         private System.Windows.Forms.Button btnPicSave;
         private System.Windows.Forms.Button btnPicDelete;
         private System.Windows.Forms.Button LoadPrc;

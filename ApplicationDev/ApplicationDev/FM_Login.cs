@@ -38,7 +38,7 @@ namespace ApplicationDev // namespace : 클래스들의 모음, 프로젝트를 
         {
             try
             {
-                string strCon = "Data Source = 61.105.9.203; Initial Catalog = AppDev; USER ID = kfqs1; Password = 1234"; // 접속주소
+                string strCon = "Data Source = 222.235.141.8; Initial Catalog = AppDev; USER ID = kfqs1; Password = 1234"; // 접속주소
                 Connect_Log = new SqlConnection(strCon);                                                                 // 접속 정보 관리 클래스에 접속주소를 입력
                 Connect_Log.Open();                                                                                      // 데이터 베이스에 접속한다.
 
@@ -87,8 +87,8 @@ namespace ApplicationDev // namespace : 클래스들의 모음, 프로젝트를 
                 }
                 else
                 {
-                    DEV_Form.Common.LoginID = txtID.Text;
-                    DEV_Form.Common.LoginName = DtTemp_Login.Rows[0]["USERNAME"].ToString(); // 유저 명을 common에 등록함
+                     Common.LoginID = txtID.Text;
+                     Common.LoginName = DtTemp_Login.Rows[0]["USERNAME"].ToString(); // 유저 명을 common에 등록함
 
                     this.Tag = DtTemp_Login.Rows[0]["USERNAME"].ToString(); // 로그인 화면이 닫혀도 데이터를 유지하기 위해 Tag에 저장한다
                                                                             // FM_Main.cs에서 FM_Login Login = new FM_Login(); 객체 생성과 Login.ShowDialog();로 로그인창 띄운후

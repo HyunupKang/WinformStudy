@@ -35,6 +35,8 @@ namespace ApplicationDev
             this.MDI_TEST = new System.Windows.Forms.ToolStripMenuItem();
             this.MDI_TEST2 = new System.Windows.Forms.ToolStripMenuItem();
             this.FM_ITEM = new System.Windows.Forms.ToolStripMenuItem();
+            this.FM_CUST = new System.Windows.Forms.ToolStripMenuItem();
+            this.Fm_Cust2 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.stbSearch = new System.Windows.Forms.ToolStripButton();
             this.stbInsert = new System.Windows.Forms.ToolStripButton();
@@ -48,8 +50,8 @@ namespace ApplicationDev
             this.tssUserName = new System.Windows.Forms.ToolStripStatusLabel();
             this.tssNowDate = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
-            this.FM_CUST = new System.Windows.Forms.ToolStripMenuItem();
             this.myTabControl1 = new ApplicationDev.MyTabControl();
+            this.FM_USER = new System.Windows.Forms.ToolStripMenuItem();
             this.Menustrip.SuspendLayout();
             this.toolStrip.SuspendLayout();
             this.statusStrip.SuspendLayout();
@@ -71,7 +73,9 @@ namespace ApplicationDev
             this.MDI_TEST,
             this.MDI_TEST2,
             this.FM_ITEM,
-            this.FM_CUST});
+            this.FM_CUST,
+            this.Fm_Cust2,
+            this.FM_USER});
             this.M_SYSTEM.Name = "M_SYSTEM";
             this.M_SYSTEM.Size = new System.Drawing.Size(98, 24);
             this.M_SYSTEM.Text = "시스템관리";
@@ -94,6 +98,18 @@ namespace ApplicationDev
             this.FM_ITEM.Name = "FM_ITEM";
             this.FM_ITEM.Size = new System.Drawing.Size(175, 26);
             this.FM_ITEM.Text = "품목 관리";
+            // 
+            // FM_CUST
+            // 
+            this.FM_CUST.Name = "FM_CUST";
+            this.FM_CUST.Size = new System.Drawing.Size(175, 26);
+            this.FM_CUST.Text = "고객사 관리";
+            // 
+            // Fm_Cust2
+            // 
+            this.Fm_Cust2.Name = "Fm_Cust2";
+            this.Fm_Cust2.Size = new System.Drawing.Size(175, 26);
+            this.Fm_Cust2.Text = "Fm_Cust2";
             // 
             // toolStrip
             // 
@@ -123,6 +139,7 @@ namespace ApplicationDev
             this.stbSearch.Text = "조회";
             this.stbSearch.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.stbSearch.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.stbSearch.Click += new System.EventHandler(this.stbSearch_Click);
             // 
             // stbInsert
             // 
@@ -134,6 +151,7 @@ namespace ApplicationDev
             this.stbInsert.Text = "추가";
             this.stbInsert.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.stbInsert.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.stbInsert.Click += new System.EventHandler(this.stbInsert_Click);
             // 
             // stbDelete
             // 
@@ -145,6 +163,7 @@ namespace ApplicationDev
             this.stbDelete.Text = "삭제";
             this.stbDelete.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.stbDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.stbDelete.Click += new System.EventHandler(this.stbDelete_Click);
             // 
             // stbSave
             // 
@@ -156,6 +175,7 @@ namespace ApplicationDev
             this.stbSave.Text = "저장";
             this.stbSave.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
             this.stbSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageAboveText;
+            this.stbSave.Click += new System.EventHandler(this.stbSave_Click);
             // 
             // toolStripSeparator1
             // 
@@ -227,12 +247,6 @@ namespace ApplicationDev
             this.timer1.Interval = 1000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
-            // FM_CUST
-            // 
-            this.FM_CUST.Name = "FM_CUST";
-            this.FM_CUST.Size = new System.Drawing.Size(175, 26);
-            this.FM_CUST.Text = "고객사 관리";
-            // 
             // myTabControl1
             // 
             this.myTabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -241,6 +255,12 @@ namespace ApplicationDev
             this.myTabControl1.SelectedIndex = 0;
             this.myTabControl1.Size = new System.Drawing.Size(922, 369);
             this.myTabControl1.TabIndex = 4;
+            // 
+            // FM_USER
+            // 
+            this.FM_USER.Name = "FM_USER";
+            this.FM_USER.Size = new System.Drawing.Size(175, 26);
+            this.FM_USER.Text = "사용자 관리";
             // 
             // FM_Main
             // 
@@ -289,6 +309,8 @@ namespace ApplicationDev
         private MyTabControl myTabControl1;
         private System.Windows.Forms.ToolStripMenuItem FM_ITEM;
         private System.Windows.Forms.ToolStripMenuItem FM_CUST;
+        private System.Windows.Forms.ToolStripMenuItem Fm_Cust2;
+        private System.Windows.Forms.ToolStripMenuItem FM_USER;
         // private UserControl1 userControl11;
     }
 }

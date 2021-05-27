@@ -33,7 +33,7 @@ namespace ApplicationDev
         private void btnChange_Click(object sender, EventArgs e)
         {
             // 비밀 번호를 변경한다.
-            string strCon = "Data Source = 61.105.9.203; Initial Catalog = AppDev; USER ID = kfqs; Password = 1234"; // 접속주소
+            string strCon = "Data Source = 222.235.141.8; Initial Catalog = AppDev; USER ID = kfqs; Password = 1234"; // 접속주소
             Connect = new SqlConnection(strCon); // 접속 정보 관리 클래스에 접속주소를 입력
             Connect.Open();                      // 데이터 베이스에 접속한다.
 

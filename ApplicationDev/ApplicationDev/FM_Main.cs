@@ -94,6 +94,40 @@ namespace ApplicationDev
 
             myTabControl1.AddForm(ShowForm); // 탭페이지에 폼을 추가한다.myTabControl1은 MyTabControl의 이름이다.
         }
+
+        private void stbSearch_Click(object sender, EventArgs e)
+        {
+            ChildCommand("SEARCH");
+        }
+
+        private void stbInsert_Click(object sender, EventArgs e)
+        {
+            ChildCommand("NEW");
+        }
+
+        private void stbDelete_Click(object sender, EventArgs e)
+        {
+            ChildCommand("DELETE");
+        }
+
+        private void stbSave_Click(object sender, EventArgs e)
+        {
+            ChildCommand("SAVE");
+        }
+
+        private void ChildCommand(string command)
+        {
+            if (this.myTabControl1.TabPages.Count == 0) return;
+            var child = myTabControl1.SelectedTab.Controls[0] as DEV_Form.ChildInterface;  // controls[0]이 form을 말한다. 그 form이 DEV_FORM의 childinterface를 받았는지 여부를 확인한다.
+
+            switch(command)
+            {
+                case "NEW": child.DoNew(); break;
+                case "SAVE": child.Save(); break;
+                case "SEARCH": child.inquire(); break;
+                case "DELETE": child.Delete(); break;
+            }
+        }
     }
 
     public partial class MDIForm : TabPage  //  TabPage를 MIDForm이란 이름으 로 쓰려고 partial class를 작성한거임
